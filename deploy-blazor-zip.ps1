@@ -13,7 +13,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
-$ZipUrl = "https://github.com/bumblebee333/TestBlazorApp/tree/master/Releases/app/zip"
+$ZipUrl = "https://github.com/bumblebee333/TestBlazorApp/tree/master/Releases/app.zip"
 
 Write-Host "Starting Zip Deploy"
 Write-Host "Resource Group : $ResourceGroup"
@@ -49,9 +49,7 @@ if ((Get-Item $ZipFile).Length -eq 0) {
 # ----------------------------
 Write-Host "Deploying ZIP to App Service..."
 
-az webapp deployment source config-zip `
-    --resource-group $ResourceGroup `
-    --name $WebAppName `
-    --src $ZipFile
+#az webapp deployment source config-zip --resource-group $ResourceGroup  --name $WebAppName --src $ZipFile
+Publish-AzWebApp -ResourceGroupName $ResourceGroup -Name $WebAppName -ArchivePath $ZipFile -Force
 
 Write-Host "Zip Deploy completed successfully"
