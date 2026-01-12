@@ -21,7 +21,7 @@ Write-Host "Web App        : $WebAppName"
 Write-Host "ZIP URL        : $ZipUrl"
 
 
-$ZipFile = "$env:TEMP\app.zip"
+$ZipFile = "$env:TEMP/app.zip"
 
 # $Headers = @{
 #     Authorization = "Basic " + [Convert]::ToBase64String(
