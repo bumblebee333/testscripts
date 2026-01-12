@@ -23,11 +23,11 @@ Write-Host "ZIP URL        : $ZipUrl"
 
 $ZipFile = "$env:TEMP\app.zip"
 
-$Headers = @{
-    Authorization = "Basic " + [Convert]::ToBase64String(
-        [Text.Encoding]::ASCII.GetBytes("x-access-token:$GitHubToken")
-    )
-}
+# $Headers = @{
+#     Authorization = "Basic " + [Convert]::ToBase64String(
+#         [Text.Encoding]::ASCII.GetBytes("x-access-token:$GitHubToken")
+#     )
+# }
 
 # ----------------------------
 # Download ZIP artifact
@@ -48,6 +48,8 @@ if ((Get-Item $ZipFile).Length -eq 0) {
 # Zip Deploy
 # ----------------------------
 Write-Host "Deploying ZIP to App Service..."
+ 
+Connect-AzAccount -Identity
 
 #az webapp deployment source config-zip --resource-group $ResourceGroup  --name $WebAppName --src $ZipFile
 Publish-AzWebApp -ResourceGroupName $ResourceGroup -Name $WebAppName -ArchivePath $ZipFile -Force
